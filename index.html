@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>力士クイズ</title>
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link href="https://fonts.googleapis.com/css2?family=Source+Han+Serif&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+  
+    <link href="https://fonts.googleapis.com/css2?family=Zen+Maru+Gothic&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+  <main>
+    <section class="odd_section">
+      <section class="title_section">
+      <h1>このお相撲さん、だ～れだ？</h1>
+      <h3>だまされたと思って、相撲見て！</h3>
+      </section>
+    </section>
+
+<section class="even_section">
+      <section class="concept_section">
+      <h2>コンセプト</h2>
+          <p>最近、<span>視聴率が１７%</span>を超えるなど、人気が高まっている大相撲。</p>
+          <p>でも周りに相撲について話せる人が少ない……</p>
+          <p>そこで大相撲を身近に感じてもらえるよう、クイズを作成しました</p> 
+    </section>
+</section>
+
+<section class="odd_section">
+      <section class="gogatu_section">
+      <h2>注目の五月場所</h2>
+          <p>年６回、奇数月に、１５日間行われる「本場所」</p>
+          <p>今回の注目は、なんといっても”大の里”</p>
+          <p>今回優勝すれば、とんでもない早さで<span> 横綱昇進</span></p>
+         
+       </section>
+</section>
+
+<section class="even_section">
+      <section class="banduke_section">
+      <h2>番付とは？</h2>
+          <p>前回までの成績を反映した力士の強さランキングのこと。</p>
+          <p>約７００人いる力士うち、１番上のリーグ（サッカーでいうJ1）に属しているのが</p>
+          <p><span>「幕内」</span>と言われる42人。</p>
+          <p>幕内のなかでも横綱、大関、関脇、小結、前頭というランクが存在して、</p>
+          <p>成績が良ければランクアップしていく。</p>
+      </section>
+</section>
+
+
+<section class="odd_section">
+      <section  id="result">
+          <h2>力士クイズ</h2>
+          <p>「新しい力士」ボタンをタップすると、画面に力士の写真が登場します。</p>
+          <p>その写真の力士の名前はどちらでしょう？</p>
+          <p>下の二つのボタンから選んでください。</p>
+          <p>プルダウンから難易度も選択できます</p>
+      </section>
+
+      <section id="dropdown_section">
+          <select id="dropdown">
+          <option value="script1">初級</option>
+          <option value="script2">中級</option>
+          </select>
+      </section>
+</section>
+
+
+<section class="even_section">
+
+      <section class="quiz_image">
+      <div id="quiz_image_inner">
+        <p>ここに表示される力士の名前を当ててください</p>
+        <!-- ここをimgタグで置き換え -->
+      </div>
+    </section>
+
+    <section class="button_new">
+        <button id="button0">新しい力士</button>
+    </section>
+
+    <section class="button_select_outer">
+      <div class="button_select">
+        <button id="button1"></button>
+        <button id="button2"></button>
+      </div>
+    </section>
+
+</section>
+    
+
+<section class="odd_section2">
+
+      <!-- 正解 or 残念を表示 -->
+    <section id="result_section">
+      <h3></h3>
+    </section>
+
+
+    <!-- ここに正解の力士の説明文を表示 -->
+    <section id="result_detail">
+      <h3></h3>
+    </section>
+
+</section>
+ 
+
+
+
+     
+
+
+
+  </main>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+
+    $(document).ready(function () {
+    let selectedValue = $("#dropdown").val(); // 初期値を取得
+    if (selectedValue === "script1") {
+        script1();
+    } else if (selectedValue === "script2") {
+        script2();
+    }
+    });
+
+
+    $("#dropdown").on("change", function () {
+    let selectedValue = $(this).val(); // 最新の値を取得
+    console.log(selectedValue);
+
+    if (selectedValue === "script1") {
+        script1();
+    } else if (selectedValue === "script2") {
+        script2();
+    }
+    });
+
+
+
+ 
+function script1() {
+
+                  $("#button0").off("click");
+                  $("#button1").off("click");
+                  $("#button2").off("click");
+
+                 let previousNumber = null;  
+
+                $("#button0").on("click", function () {  
+
+              let randomNumber;
+              do {
+                  randomNumber = Math.floor(Math.random() * 7);
+              } while (randomNumber === previousNumber);
+              
+              console.log(randomNumber);
+              
+              let texts = [
+                          "豊昇龍", "大の里", "琴櫻", "大栄翔", "霧島",
+                          "髙安", "若隆景", 
+                      ];
+
+              let randomDecision = Math.random() < 0.5;
+
+                  if (randomDecision) {
+                      $("#button1").css("order", 2);
+                      $("#button2").css("order", 1);
+                  } else {
+                      $("#button1").css("order", 1);
+                      $("#button2").css("order", 2);
+                  }
+
+
+
+              if (randomNumber === 0) {
+                $("#quiz_image_inner").html('<img src="./img/0hosyoryu.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 7);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+              } else if (randomNumber === 1){
+                $("#quiz_image_inner").html('<img src="./img/1onosato.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 7);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+              } else if (randomNumber === 2){
+                $("#quiz_image_inner").html('<img src="./img/2kotozakura.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 7);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+              } else if (randomNumber === 3){
+                $("#quiz_image_inner").html('<img src="./img/3daieisyo.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 7);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+              } else if (randomNumber === 4){
+                $("#quiz_image_inner").html('<img src="./img/4kirishima.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 7);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+              } else if (randomNumber === 5){
+                $("#quiz_image_inner").html('<img src="./img/5takayasu.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 7);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+                
+              } else{
+                $("#quiz_image_inner").html('<img src="./img/6wakatakakage.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 7);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+              }
+
+              previousNumber = randomNumber;   // 前回の数字を保存
+              console.log(previousNumber);
+
+              $("#result_section").text("");
+              $("#result_detail").text(""); // 正解・残念の表示を消す
+
+
+            });
+
+
+          let texts2 = [
+                          `豊昇龍（ほうしょうりゅう）　横綱<br>
+                          小さいながらも、技巧派で頂点の横綱まで上り詰めた。<br>
+                          闘志あふれる鋭い眼光も魅力的。<br>
+                          あの有名な朝青龍の甥にあたりますが、不祥事は起こしておりません。<br>
+                          モンゴル出身の25歳。<br>
+                          `,
+
+                          `大の里（おおのさと）　大関<br>
+                          若手のホープ。わずか２年で大関まで昇進というスピード出世。<br>
+                          今場所優勝すれば、おそらく横綱昇進。<br>
+                          石川出身の24歳。<br>
+                          `,
+                          
+                          `琴櫻（ことざくら）　大関<br>
+                          祖父である、先代の琴櫻から名前を受け継ぐ。<br>
+                          恵まれた体格を活かした、押し相撲を得意とする。<br>
+                          千葉県松戸市出身の24歳。<br>
+                          `,
+                          
+                          `大栄翔（だいえいしょう）　関脇<br>
+                          「令和の猛牛」の愛称を持つ。<br>
+                          馬力を活かした、力強い突き押しが持ち味。<br>
+                          埼玉県出身の３１歳。<br>
+                          `,
+                        
+                          `霧島（きりしま）　関脇<br>
+                          大関まで上り詰めた実力者。<br>
+                          遊牧の際の乗馬や水汲みで自然と足腰が鍛えられたらしい。<br>
+                          モンゴル出身の３０歳<br>
+                          `,
+
+                          `髙安（たかやす）　小結<br>
+                          実力はありながら、ケガに悩まされるベテラン。<br>
+                          何度も優勝に手がかかっているが、優勝は未経験。<br>
+                          （おそらく、初優勝したら、相撲ファンはみな涙するのではないでしょうか？）<br>
+                          最近は復調し、ベテランならではの風格が漂いつつある。（と個人的には感じている）<br>
+                          稽古が厳しく、6時間かけて自転車で実家まで脱走した経験あり。<br>
+                          茨城出身の３５歳。
+                          `,
+
+                          `若隆景（わかたかかげ）　小結<br>
+                          技術の高さに定評があり、玄人好みの取り口。<br>
+                          相撲一家に生まれ、同じ幕内の若元春は兄にあたる。イケメンとSNS上で話題。<br>
+                          福島県出身の３０歳。
+                          `,
+                      ];
+
+
+            // 正解を押したら、正解の記述
+            $("#button1").on("click", function () {
+              $("#result_section").text("〇　正解！！"); 
+              $("#result_detail").html(texts2[previousNumber]);
+              
+          });
+
+          // 間違いを押したら、残念の記述
+          $("#button2").on("click", function () {
+            $("#result_section").text("✕　残念……");
+            $("#result_detail").html(texts2[previousNumber]);
+          });
+
+}
+
+
+function script2() {
+
+                   $("#button0").off("click");
+                  $("#button1").off("click");
+                  $("#button2").off("click");
+
+                let previousNumber = null;  
+
+                $("#button0").on("click", function () {  
+
+              let randomNumber;
+              do {
+                  randomNumber = Math.floor(Math.random() * 17);
+              } while (randomNumber === previousNumber);
+              
+              console.log(randomNumber);
+              
+              let texts = [
+                          "豊昇龍", "大の里", "琴櫻", "大栄翔", "霧島",
+                          "髙安", "若隆景", "若元春","王鵬","阿炎",
+                          "玉鷲","平戸海","尊富士","宇良","翔猿",
+                          "伯桜鵬","熱海富士",
+                      ];
+
+              let randomDecision = Math.random() < 0.5;
+
+                  if (randomDecision) {
+                      $("#button1").css("order", 2);
+                      $("#button2").css("order", 1);
+                  } else {
+                      $("#button1").css("order", 1);
+                      $("#button2").css("order", 2);
+                  }
+
+
+
+              if (randomNumber === 0) {
+                $("#quiz_image_inner").html('<img src="./img/0hosyoryu.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 17);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+              } else if (randomNumber === 1){
+                $("#quiz_image_inner").html('<img src="./img/1onosato.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 17);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+              } else if (randomNumber === 2){
+                $("#quiz_image_inner").html('<img src="./img/2kotozakura.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 17);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+              } else if (randomNumber === 3){
+                $("#quiz_image_inner").html('<img src="./img/3daieisyo.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 17);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+              } else if (randomNumber === 4){
+                $("#quiz_image_inner").html('<img src="./img/4kirishima.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 17);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+              } else if (randomNumber === 5){
+                $("#quiz_image_inner").html('<img src="./img/5takayasu.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 17);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+
+                } else if (randomNumber === 6){
+                $("#quiz_image_inner").html('<img src="./img/6wakatakakage.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 17);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+                 } else if (randomNumber === 7){
+                $("#quiz_image_inner").html('<img src="./img/7wakamotoharu.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 17);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+                 } else if (randomNumber === 8){
+                $("#quiz_image_inner").html('<img src="./img/8oho.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 17);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+                 } else if (randomNumber === 9){
+                $("#quiz_image_inner").html('<img src="./img/9abi.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 17);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+                 } else if (randomNumber === 10){
+                $("#quiz_image_inner").html('<img src="./img/10tamawashi.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 17);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+                 } else if (randomNumber === 11){
+                $("#quiz_image_inner").html('<img src="./img/11hiradoumi.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 17);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+                 } else if (randomNumber === 12){
+                $("#quiz_image_inner").html('<img src="./img/12takerufuji.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 17);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+                 } else if (randomNumber === 13){
+                $("#quiz_image_inner").html('<img src="./img/13ura.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 17);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+
+                 } else if (randomNumber === 14){
+                $("#quiz_image_inner").html('<img src="./img/14tobizaru.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 17);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+
+                 } else if (randomNumber === 15){
+                $("#quiz_image_inner").html('<img src="./img/15hakuoho.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 17);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+
+
+
+
+              } else{
+                $("#quiz_image_inner").html('<img src="./img/16atamifuji.jpg" alt="" class="resize">');
+                $("#button1").text(texts[randomNumber]);
+                let opponent;
+                do {
+                opponent = Math.floor(Math.random() * 17);
+                } while (opponent === randomNumber);
+                console.log(opponent);
+                $("#button2").text(texts[opponent]);
+              }
+
+              previousNumber = randomNumber;   // 前回の数字を保存
+              console.log(previousNumber);
+
+              $("#result_section").text("");
+              $("#result_detail").text(""); // 正解・残念の表示を消す
+
+
+            });
+
+
+          let texts2 = [
+                          `豊昇龍（ほうしょうりゅう）　横綱<br>
+                          小さいながらも、技巧派で頂点の横綱まで上り詰めた。<br>
+                          闘志あふれる鋭い眼光も魅力的。<br>
+                          あの有名な朝青龍の甥にあたりますが、不祥事は起こしておりません。<br>
+                          モンゴル出身の２５歳。<br>
+                          `,
+
+                          `大の里（おおのさと）　大関<br>
+                          若手のホープ。わずか２年で大関まで昇進というスピード出世。<br>
+                          今場所優勝すれば、おそらく横綱昇進。<br>
+                          石川出身の２４歳。<br>
+                          `,
+                          
+                          `琴櫻（ことざくら）　大関<br>
+                          祖父である、先代の琴櫻から名前を受け継ぐ。<br>
+                          恵まれた体格を活かした、押し相撲を得意とする。<br>
+                          千葉県松戸市出身の２４歳。<br>
+                          `,
+                          
+                          `大栄翔（だいえいしょう）　関脇<br>
+                          「令和の猛牛」の愛称を持つ。<br>
+                          馬力を活かした、力強い突き押しが持ち味。<br>
+                          埼玉県出身の３１歳。<br>
+                          `,
+                        
+                          `霧島（きりしま）　関脇<br>
+                          大関まで上り詰めた実力者。<br>
+                          遊牧の際の乗馬や水汲みで自然と足腰が鍛えられたらしい。<br>
+                          モンゴル出身の３０歳<br>
+                          `,
+
+                          `髙安（たかやす）　小結<br>
+                          実力はありながら、ケガに悩まされるベテラン。<br>
+                          何度も優勝に手がかかっているが、優勝は未経験。<br>
+                          （おそらく、初優勝したら、相撲ファンはみな涙するのではないでしょうか？）<br>
+                          最近は復調し、ベテランならではの風格が漂いつつある。（と個人的には感じている）<br>
+                          稽古が厳しく、6時間かけて自転車で実家まで脱走した経験あり。<br>
+                          茨城出身の３５歳。
+                          `,
+
+                          `若隆景（わかたかかげ）　小結<br>
+                          技術の高さに定評があり、玄人好みの取り口。<br>
+                          相撲一家に生まれ、同じ幕内の若元春は兄にあたる。イケメンとSNS上で話題。<br>
+                          福島県出身の３０歳。
+                          `,
+
+                          
+                          `若元春（わかもとはる）　前頭<br>
+                          左四つを得意とする。<br>
+                          相撲一家に生まれ、同じ幕内の若隆景は弟にあたる。<br>
+                          福島県出身の３１歳。
+                          `,
+
+                          
+                          `王鵬（おうほう）　前頭<br>
+                          若手の実力者。突き押しが得意。<br>
+                          父は貴闘力、祖父は大鵬という相撲一家出身。<br>
+                          東京都出身の２５歳。
+                          `,
+
+                          
+                          `阿炎（あび）　前頭<br>
+                          スピードと突きが持ち味。変化も得意とする技巧派。<br>
+                          コロナ禍の中、やらかして謹慎をした経験の持ち主。<br>
+                          埼玉県出身の３１歳。
+                          `,
+
+                          
+                          `玉鷲（たまわし）　前頭<br>
+                          鉄人の異名を持つ大ベテラン。<br>
+                          ４０歳でなぜあんなに強さを維持できるか不明。<br>
+                          長身から繰り出す突き押しが得意。モンゴル出身。
+                          `,
+
+                          
+                          `平戸海（平戸海）　前頭<br>
+                          立ち合い鋭く踏み込む速攻が得意。<br>
+                          無類の稽古好きで知られる。<br>
+                          長崎県出身の２５歳。
+                          `,
+
+                          
+                          `尊富士（たけるふじ）　前頭<br>
+                          押し相撲も四つ相撲もできるバランス型。<br>
+                          ベンチプレス220kgを挙げる怪力の持ち主<br>
+                          青森県出身の２５歳。
+                          `,
+
+                          
+                                        
+                          `宇良（うら）　前頭<br>
+                          技のデパートと評されることもある技巧派。<br>
+                          珍しい、ピンクの廻しを使用。<br>
+                          大阪出身の３２歳
+                          `,
+
+                          
+                          `翔猿（とびざる）　前頭<br>
+                          小柄ながら運動神経が抜群。<br>
+                          動き回って相手を翻弄し、引き技で仕留める。<br>
+                          東京都出身の３３歳。
+                          `,
+
+                           
+                          `伯桜鵬（はくおうほう）　前頭<br>
+                          組んで良し、離れて良しのオールラウンダー。<br>
+                          学生時代や十両での活躍から、「令和の怪物」と称されることも。<br>
+                          鳥取県出身の２１歳。
+                          `,
+
+                           
+                          `熱海富士（あたみふじ）　前頭<br>
+                          右四つが得意。かわいらしい顔に似合わない厳しい相撲を取る。<br>
+                          永谷園のCMにも出演。<br>
+                          静岡県出身の２２歳。
+                          `,
+
+                      ];
+
+
+
+
+
+            // 正解を押したら、正解の記述
+            $("#button1").on("click", function () {
+              $("#result_section").text("〇　正解！！"); 
+              $("#result_detail").html(texts2[previousNumber]);
+              
+          });
+
+          // 間違いを押したら、残念の記述
+          $("#button2").on("click", function () {
+            $("#result_section").text("✕　残念……");
+            $("#result_detail").html(texts2[previousNumber]);
+          });
+
+
+}
+   
+
+
+
+
+
+
+
+
+  </script>
+</body>
+
+</html>

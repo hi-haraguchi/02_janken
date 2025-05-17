@@ -1,0 +1,228 @@
+
+body{
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-weight: 550;
+}
+
+.odd_section{
+  padding: 20px 0;
+  background-color: darkslategray;
+  color: #FFFFFF;
+}
+
+
+.even_section{
+  padding: 20px 0;
+  background-color: #FFFFFF;
+}
+
+
+
+.title_section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  color: #FFFFFF;
+}
+
+
+.concept_section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.gogatu_section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+
+.banduke_section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.banduke_section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+#result{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#dropdown_section{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+#dropdown{
+  float: left;
+  min-width: 75px;
+  margin: 3px 0;
+  font-family: 'Zen Maru Gothic', sans-serif;
+  font-weight: bold;
+  color: rgb(56, 55, 55);
+  text-align: center;
+  border-radius: 60px;
+}
+
+
+.quiz_image{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.button_new{
+  margin: 10px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.button_select_outer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+
+.button_select{
+  display: flex;
+  gap: 50px;
+}
+
+button{
+  width: 150px;
+  height: 50px;
+  font-size: 20px;
+  font-weight: 500;
+  background-color: lightgray;
+  color: #000;
+  border: none;
+  box-shadow: 0 5px 0 gray; /* 影の太さ・色 */
+  border-radius: 60px;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+button:active {
+  box-shadow: none;
+  transform: translateY(5px);
+}
+
+#button1, #button2 {
+    flex: 1;       /* ボタンが均等な幅になるよう調整 */
+}
+
+#button0{
+  width: 100px;
+  height: 30px;
+  font-size: 14px;
+  font-weight: 500;
+  background-color: lightgray;
+  color: #000;
+  border: none;
+  border-radius: 60px;
+  cursor: pointer;  
+}
+
+
+
+
+h1{
+  font-size: 60px;
+  margin-bottom: 20px;
+  margin: 40px auto;
+}
+
+h2{
+  font-size: 22px;
+  border-bottom: 1px solid #000;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+}
+
+.odd_section h2{
+  font-size: 20px;
+  border-bottom: 1px solid #FFFFFF;
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+}
+
+
+h3{
+  font-size: 20px;
+  margin-bottom: 20px;
+}
+
+p{
+  font-size: 15px;
+  margin:5px 0;
+}
+
+span{
+  font-weight: bold;
+  font-size: x-large;
+}
+
+.resize{
+  width : 400px;
+  height: 450px;
+  object-fit: cover;
+}
+
+#result_section{
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  margin: 10px 0;
+  height: 50px;
+  font-weight: bold;
+  font-size: 30px;
+}
+
+.odd_section2{
+  padding:  0 0 20px 0;
+  background-color: darkslategray;
+  color: #FFFFFF;
+}
+
+
+
+#result_detail{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  height: 120px;
+  font-size: 16px;
+  line-height: 1.3;
+
+}
+
